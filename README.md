@@ -1,17 +1,9 @@
-# flink-postgres-starrocks
+# flink-mysql-starrocks
 
-Probably I should be looking at [StarRocks Migration Tool](https://docs.starrocks.io/docs/integrations/loading_tools/SMT/#synchronize-postgresql-to-starrocks)
+- the Dockerfile sets up the Flink containers
+- the compose file deploys mysql, starrocks, and a Flink cluster
+- there is a SQL file to create the MySQL DB and table, and load some rows.
+- there is a config file for CDC in /opt/flink/flinkcdc (I don't remember the details, but in the quick start linked below there is a step where you run the job, use the file I put in the opt/flink/flickcdc-something-or-other file)
 
-or:
+Use the quick start at https://nightlies.apache.org/flink/flink-cdc-docs-release-3.1/docs/get-started/quickstart/mysql-to-starrocks/
 
-[Airbyte](https://github.com/StarRocks/starrocks/discussions/23713)
-
-Experimenting with using Apache Flink to migrate tables from PostgreSQL to StarRocks.
-
-The Docker Compose file will launch PostgreSQL and Flink. It also describes a Flink SQL service which can be launched with `docker compose run`.
-
-PostgreSQL is configured with WAL set to `logical` as this is needed when using the `postgres-cdc` plugin.
-
-The file `postgres.sql` contains DDL and DML to create and load a table in PostgreSQL.
-
-The file `flink.sql` contains Flink SQL commands to create a Flink table associated with the PostgreSQL table.
