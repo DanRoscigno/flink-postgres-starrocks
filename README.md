@@ -1,5 +1,11 @@
 # flink-postgres-starrocks
 
+Probably I should be looking at [StarRocks Migration Tool](https://docs.starrocks.io/docs/integrations/loading_tools/SMT/#synchronize-postgresql-to-starrocks)
+
+or:
+
+[Airbyte](https://github.com/StarRocks/starrocks/discussions/23713)
+
 Experimenting with using Apache Flink to migrate tables from PostgreSQL to StarRocks.
 
 The Docker Compose file will launch PostgreSQL and Flink. It also describes a Flink SQL service which can be launched with `docker compose run`.
