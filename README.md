@@ -98,7 +98,7 @@ The MySQL and StarRocks configs are in `docker-compose.yaml`.
 
   > Note
   >
-  > `jobmanager` uses the Docker image built based on the `flink.Dockerfile`. The compose file exposes port 8081 for the Flink Web UI and mounts `mysql-to-starrocks.yaml` in the running `jobmanager` service.
+  > `jobmanager` uses the Docker image built based on the `flink.Dockerfile`. The compose file exposes port 8081 for the Flink Web UI and mounts `mysql-to-starrocks.yaml` in the running `jobmanager` service. The `rpc.address` setting is used for communication between `jobmanager` and `taskmanager`.
 
   ```yaml
     jobmanager:
@@ -120,7 +120,7 @@ The MySQL and StarRocks configs are in `docker-compose.yaml`.
 
   > Note
   >
-  > `taskmanager` uses the same Docker image as `jobmanager`. based on the `flink.Dockerfile`. No ports are exposed as the taskmanager only needs access within the Docker environment.
+  > `taskmanager` uses the same Docker image as `jobmanager`. based on the `flink.Dockerfile`. No ports are exposed as the taskmanager only needs access within the Docker environment. The `rpc.address` setting is used for communication between `jobmanager` and `taskmanager`. `taskmanager.numberOfTaskSlots` is set to `2` to allow the `taskmanager` to accept two tasks/pipelines instead of the default, which is one.
 
   ```yaml
     taskmanager:
