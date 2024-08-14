@@ -264,7 +264,7 @@ After a successful submission, the output is similar to:
 
 We can find a job  named `Sync MySQL Database to StarRocks` is running through Flink Web UI.
 
-Connect to jdbc through database connection tools such as Dbeaver using `mysql://127.0.0.1:9030`. You can view the data written to three tables in StarRocks.
+Connect to StarRocks with a SQL client such as Dbeaver using `mysql://127.0.0.1:9030`. You can view the data written to three tables in StarRocks.
 
 ### Synchronize Schema and Data changes
 
