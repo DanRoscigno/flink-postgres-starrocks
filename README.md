@@ -90,7 +90,7 @@ The MySQL and StarRocks configs are in `docker-compose.yaml`.
       - "9030:9030"
   ```
 
-  - SQl Client
+  - SQL Client
 
   This is probably not used, I should remove it and see.
 
