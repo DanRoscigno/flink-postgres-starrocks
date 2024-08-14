@@ -264,7 +264,7 @@ After a successful submission, the output is similar to:
 
 We can find a job  named `Sync MySQL Database to StarRocks` is running through Flink Web UI.
 
-Connect to StarRocks with a SQL client such as Dbeaver using `mysql://127.0.0.1:9030`. You can view the data written to three tables in StarRocks.
+Connect to StarRocks with a SQL client such as DBeaver using `mysql://127.0.0.1:9030`. You can view the data written to three tables in StarRocks.
 
 ### Synchronize Schema and Data changes
 
@@ -301,7 +301,7 @@ Modify the schema and records in MySQL, and the tables in StarRocks will reflect
    DELETE FROM app_db.orders WHERE id=2;
    ```
 
-Refresh the Dbeaver every time you execute a step, and you can see that the `orders` table displayed in StarRocks will be updated in real-time, like the following：
+Re-run the SQL queries in the StarRocks SQL client (DBeaver if you used that) every time you execute a step, and you can see that the `orders` table displayed in StarRocks will be updated in real-time, like the following：
 
 Similarly, by modifying the `shipments` and `products` tables, you can also see the results of synchronized changes in real-time in StarRocks.
 
