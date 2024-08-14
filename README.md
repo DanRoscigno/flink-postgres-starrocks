@@ -254,7 +254,7 @@ Notice that:
    bash bin/flink-cdc.sh mysql-to-starrocks.yaml
    ```
    
-After successful submission, the return information is as follows：
+After a successful submission, the output is similar to:
 
    ```shell
    Pipeline has been submitted to cluster.
