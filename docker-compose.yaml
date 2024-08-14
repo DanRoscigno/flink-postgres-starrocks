@@ -1,5 +1,4 @@
 services:
-
   jobmanager:
     image: starrocks/flink
     build:
@@ -40,7 +39,6 @@ services:
         FLINK_PROPERTIES=
         jobmanager.rpc.address: jobmanager
         rest.address: jobmanager
-
   StarRocks:
     image: starrocks/allin1-ubuntu:3.2.6
     ports:
@@ -54,3 +52,12 @@ services:
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_USER=mysqluser
       - MYSQL_PASSWORD=mysqlpw
+  postgres:
+    image: debezium/example-postgres:2.1
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
