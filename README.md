@@ -1,5 +1,7 @@
 # flink-mysql-starrocks
 
+Based on the Ververica blog [Build Streaming ETL for MySQL and Postgres based on Flink CDC](https://www.ververica.com/blog/how-to-guide-build-streaming-etl-for-mysql-and-postgres-based-on-flink-cdc).
+
 ## Launch the environment
 
 Docker Compose is used. These services are provided
