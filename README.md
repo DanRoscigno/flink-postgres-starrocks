@@ -54,7 +54,7 @@ Additionally, a service that is not auto-started is provided to run the Flink SQ
 Launch the MySQL CLI in the container (you can use Dbeaver or other clients if you like) and run the SQL queries in the file `mysql.sql`
 
 ```bash
-docker compose exec MySQL mysql -uroot -p 123456 --prompt="MySQL > "
+docker compose exec MySQL mysql -uroot -p123456 --prompt="MySQL > "
 ```
 
 ### PostgreSQL
@@ -65,6 +65,14 @@ Launch the PostgreSQL CLI in the container (you can use Dbeaver or other clients
 docker compose exec postgres psql -U postgres
 ```
 
+## Destination database
+
+StarRocks is the destination. Connect with the MySQL CLI and run the queries in `starrocks.sql`
+
+```bash
+docker compose exec StarRocks mysql -uroot \
+  -hStarRocks -P9030 --prompt="StarRocks > "
+```
 ## Flink SQL
 
 Tables in Flink SQL are interfaces to tables in the source (MySQL and PostgreSQL) databases, and to the sink table in StarRocks.
@@ -76,7 +84,7 @@ docker compose run sql-client
 ```
 ### Source tables
 
-Run the individual commands from the file flink-sql.sql. Only the first source is shown here:
+Run the individual commands from the file `flink-sql.sql`. Only the first source is shown here:
 
 ```sql
 CREATE TABLE products (
@@ -129,6 +137,13 @@ CREATE TABLE enriched_orders (
  );
 ```
 
+## Flink Web UI
+
+http://localhost:8081/#/job/running
+
+> Note:
+>
+> CDC jobs run continuously, so the job will not move from the RUNNING to COMPLETE state.
 
 ```bash
 mysql -P9030 -h 127.0.0.1 -u root --prompt="StarRocks > "
@@ -180,4 +195,52 @@ product_description: 16oz carpenter's hammer
         destination: Hangzhou
          is_arrived: 0
 3 rows in set (0.03 sec)
+```
+
+## Update the source data
+
+Next, modify the data in the tables in the MySQL and Postgres databases and the orders data displayed in Kibana will also be updated in real time.
+
+Insert a data into a MySQL `orders` table
+
+```sql
+USE mydb;
+
+INSERT INTO orders
+VALUES (default, '2020-07-30 15:22:00', 'Jark', 29.71, 104, false);
+```
+
+Update the status of an order in the MySQL orders table
+
+```sql
+USE mydb;
+
+UPDATE orders SET order_status = true WHERE order_id = 10004;
+```
+
+Insert a data into the Postgres shipments table
+
+```sql
+INSERT INTO shipments
+VALUES (default,10004,'Shanghai','Beijing',false);
+```
+
+Update the status of a shipment in the Postgres shipments table
+
+```sql
+UPDATE shipments SET is_arrived = true WHERE shipment_id = 1004;
+```
+
+Delete data in the MYSQL orders table.
+
+```sql
+DELETE FROM orders WHERE order_id = 10004;
+```
+
+## Verify that the data is updated in StarRocks
+
+## Cleanup
+
+```bash
+docker compose down -v
 ```
