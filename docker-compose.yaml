@@ -1,5 +1,4 @@
 services:
-
   jobmanager:
     image: starrocks/flink
     build:
@@ -10,9 +9,8 @@ services:
       - ./mysql-to-starrocks.yaml:/opt/flink/flink-cdc-3.1.0/mysql-to-starrocks.yaml
     command: jobmanager
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager        
+      - TZ=America/New_York
+      - "FLINK_PROPERTIES=jobmanager.rpc.address: jobmanager"
 
   taskmanager:
     image: starrocks/flink
@@ -23,10 +21,8 @@ services:
     command: taskmanager
     scale: 1
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager
-        taskmanager.numberOfTaskSlots: 2        
+      - TZ=America/New_York
+      - "FLINK_PROPERTIES=jobmanager.rpc.address: jobmanager\n taskmanager.numberOfTaskSlots: 2"
 
   sql-client:
     image: starrocks/flink
@@ -36,21 +32,34 @@ services:
     depends_on:
       - jobmanager
     environment:
-      - |
-        FLINK_PROPERTIES=
-        jobmanager.rpc.address: jobmanager
-        rest.address: jobmanager
+      - TZ=America/New_York
+      - "FLINK_PROPERTIES=jobmanager.rpc.address: jobmanager\n rest.address: jobmanager"
 
   StarRocks:
     image: starrocks/allin1-ubuntu:3.2.6
     ports:
       - "8080:8080"
       - "9030:9030"
+    environment:
+      - TZ=America/New_York
+
   MySQL:
     image: debezium/example-mysql:2.1
     ports:
       - "3306:3306"
     environment:
+      - TZ=America/New_York
       - MYSQL_ROOT_PASSWORD=123456
       - MYSQL_USER=mysqluser
       - MYSQL_PASSWORD=mysqlpw
+
+  postgres:
+    image: debezium/example-postgres:2.1
+    ports:
+      - "5432:5432"
+    environment:
+      - TZ=America/New_York
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
