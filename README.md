@@ -4,7 +4,13 @@ Based on the Ververica blog [Build Streaming ETL for MySQL and Postgres based on
 
 ## Launch the environment
 
-Docker Compose is used. These services are provided
+Docker Compose is used.
+
+```bash
+docker compose up --detach --wait --wait-timeout 120
+```
+
+These services are provided:
 
 ```bash
 docker compose ps --format json | \
