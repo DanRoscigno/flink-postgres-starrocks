@@ -4,7 +4,13 @@ RUN apt update
 RUN apt install -y neovim
 
 RUN wget -P /opt/flink/lib \
+https://repo1.maven.org/maven2/com/ververica/flink-sql-connector-postgres-cdc/3.0.1/flink-sql-connector-postgres-cdc-3.0.1.jar
+
+RUN wget -P /opt/flink/lib \
 https://repo1.maven.org/maven2/com/starrocks/flink-connector-starrocks/1.2.9_flink-1.18/flink-connector-starrocks-1.2.9_flink-1.18.jar
+
+RUN wget -P /opt/flink/lib \
+https://repo1.maven.org/maven2/com/ververica/flink-sql-connector-mysql-cdc/3.0.1/flink-sql-connector-mysql-cdc-3.0.1.jar
 
 RUN wget -P /opt/flink/lib \
 https://repo1.maven.org/maven2/mysql/mysql-connector-java/8.0.27/mysql-connector-java-8.0.27.jar
